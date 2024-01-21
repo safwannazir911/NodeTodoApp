@@ -1,0 +1,68 @@
+<%-include("partials/header.ejs") %>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,64L1440,224L1440,0L0,0Z"></path></svg>
+<div class="border-primary p-2 mt-5 rounded bg-primary-subtle todo shadow">
+  <h2 class="m-3">Todo Application</h2>
+  <h2><%=category %></h2>
+
+  <div class="m-3">
+    <h4><%=day %> <%=date %> <%=year %></h4>
+  </div>
+  <ul class="list-group m-3">
+    <% task.forEach((element) => { %>
+    <li class="list-group-item list-group-item-action li_container shadow">
+      <form action="/delete" method="post">
+        <div class="li_container">
+          <% if(element.checked){ %>
+          <input type="checkbox" class="task-checkbox shadow" name="deleteId" value="<%= element.id %>" onchange="this.form.submit()" checked />
+          <% }else{ %>
+          <input type="checkbox" class="task-checkbox shadow" name="deleteId" value="<%= element.id %>" onchange="this.form.submit()" />
+          <% } %>
+          <label class="label-container"><%= element.taskName %></label>
+          <input type="hidden" name="category" value="<%= category %>">
+        </div>
+      </form>
+    </li>
+    <% }); %>
+  </ul>
+
+  <div class="p-2">
+    <form action="/submit" method="post">
+      <div class="btn_container">
+        <input
+          type="text"
+          placeholder="Enter a new task."
+          name="task"
+          class="form-control w-75 shadow"
+          autofocus
+          autocomplete="off"
+        />
+        <input type="hidden" name="category" value="<%=category %>">
+        <button type="submit" class="btn btn-primary shadow mt-2 cool-button">
+          +
+        </button>
+      </div>
+    </form>
+    
+    <div class="container categories">
+      <a href="/category/Today">
+        <button class="btn btn-primary shadow m-2 cool-button">Today</button>
+      </a>
+      <a href="/category/Todo">
+        <button class="btn btn-primary shadow m-2 cool-button">Todo</button>
+      </a>
+      <a href="/category/Work">
+        <button class="btn btn-primary shadow m-2 cool-button">Work</button>
+      </a>
+      <a href="/category/Other">
+        <button class="btn btn-primary shadow m-2 cool-button">Other</button>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+
+<%-include("partials/footer.ejs") %>

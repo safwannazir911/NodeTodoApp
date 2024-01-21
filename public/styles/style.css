@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+.strike {
+    text-decoration: line-through !important;
+}
+
+h2, h4 {
+    text-align: center;
+    color: rgb(125, 125, 255);
+}
+
+.li_container {
+    display: flex;
+    /* Use flexbox for horizontal alignment */
+    align-items: center;
+    /* Center vertically within the container */
+}
+
+.task-checkbox {
+    margin-right: 10px;
+    /* Add some spacing between checkbox and label */
+}
+
+.label-container {
+    flex: 1;
+    /* Allow the label to expand and take available space */
+}
+
+.btn_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    border-radius: 100px !important;
+    height: fit-content;
+    width: fit-content;
+    border: none !important;
+}
+
+.cool-button {
+    background: linear-gradient(to top, #9567ff 0%, #62b6ff 100%) !important;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.cool-button:hover {
+    background: linear-gradient(to top, #9e75ff 0%, #58b1ff 100%) !important;
+    transform: scale(1.1);
+}
+
+svg {
+    position: absolute;
+    z-index: -1;
+}
+
+svg.top {
+    top: 0;
+}
+
+.categories {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+/* Default styles for the "todo" class */
+.todo {
+    display: flex;
+    flex-direction: column; 
+}
+
+/* Media query for screens with a maximum width of 768px */
+@media (max-width: 768px) {
+    .todo {
+        /* Adjust the styles for screens up to 768px wide */
+        width: 90%;
+        /* For example, change the width to 60vw */
+    }
+}
+
+/* Media query for screens with a minimum width of 1200px */
+@media (min-width: 769px) {
+    .todo {
+        /* Adjust the styles for screens wider than 1200px */
+        width: 50vw;
+        /* For example, change the width to 25vw */
+    }
+}
