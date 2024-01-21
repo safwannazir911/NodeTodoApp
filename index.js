@@ -3,21 +3,20 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import _ from "lodash";
-
+import dotenv from "dotenv"
 const __dirname = dirname(fileURLToPath(import.meta.url)); // url->path(string)->dir
 const app = express();
 
 
-// mongoose.connect("mongodb://safwan123:123@127.0.0.1:27017/todoListDB", {
-//   useNewUrlParser: true,
-// });
+dotenv.config()
 
-mongoose.connect(
-  "mongodb+srv://safwannazir911:Lexuslfa12345@cluster0.roxmicn.mongodb.net/todoListDB",
+
+mongoose.connect(process.env.MONGO_URL,
   {
     useNewUrlParser: true,
-  }
-);
+  })
+  .then(() => console.log("Database Connected"))
+  .catch(err => console.log(err));
 
 const itemsSchema = new mongoose.Schema({
   taskName: String,
@@ -77,7 +76,7 @@ app.get("/category/:parms", async (req, res) => {
     console.log(category);
     const list = await List.findOne({ listName: category });
     console.log(list);
-    if (list!=null) {
+    if (list != null) {
       console.log(list.listName);
       res.render("index.ejs", {
         task: list.items,
@@ -108,12 +107,12 @@ app.get("/category/:parms", async (req, res) => {
 
 app.post("/submit", async (req, res) => {
   try {
-    
+
     const name = req.body["task"];
     const category = req.body["category"];
-    if(name===""){
+    if (name === "") {
       console.log("Enter name");
-    }else{
+    } else {
       const task = new Task({
         taskName: name,
         checked: false,
@@ -148,6 +147,6 @@ let port = process.env.PORT;
 if (port == null || port == "") {
   port = 3000;
 }
-app.listen(port,function(){
+app.listen(port, function () {
   console.log("Listening...")
 });
